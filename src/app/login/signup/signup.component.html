@@ -33,7 +33,7 @@
                   Looks good!
                 </div>
               </div>
-            <div class="mb-1">
+            <div class="mb-1" *ngIf="actionName != 'SignUp'">
                 <label for="dob" class="form-label">Date Of Birth</label>
                 <input type="date" class="form-control is-valid" name="dob" id="dob" formControlName="dateofBirth">
                 <div class="valid-feedback">
@@ -50,6 +50,9 @@
             <div class="mb-1">
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control is-valid" name="password" id="password" formControlName="password">
+              <div *ngIf="signUpForm.errors?.['passwordNotMatch'] && (signUpForm.controls['password'].touched || signUpForm.controls['password'].dirty)" class="invalid-feedback d-block">
+                Password and Confirm Password is not same 
+                </div>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -57,12 +60,15 @@
             <div class="mb-1">
                 <label for="confirmPassword" class="form-label">Confirm Password</label>
                 <input type="password" class="form-control is-valid" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword">
-                <div class="valid-feedback">
+               <div *ngIf="signUpForm.errors?.['passwordNotMatch'] && (signUpForm.controls['confirmPassword'].touched || signUpForm.controls['confirmPassword'].dirty)" class="invalid-feedback d-block">
+                    Password and Confirm Password is not same 
+               </div>
+                <!-- <div class="valid-feedback">
                   Looks good!
-                </div>
+                </div> -->
               </div>
              <h3>Addree Section :</h3>
-             <div formGroupName="address">
+             <div formGroupName="address" *ngIf="actionName != 'SignUp'">
             <div class="col-md-6">
               <label for="line1" class="form-label">Line 1</label>
               <input type="text" class="form-control is-invalid" name="line1" id="line1" aria-describedby="validationServer03Feedback"  formControlName="line1">

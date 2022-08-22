@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { passWordMisMatch } from 'src/app/shared/validator/custom.validator';
 
 @Component({
   selector: 'app-signup',
@@ -8,10 +9,20 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class SignupComponent implements OnInit {
   signUpForm!:FormGroup;
+
+  @Input()
+  actionName:string = '';
+
+  // set actionName()
+
   constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.createFormStructure();
+  }
+
+  ngAfterViewInit(){
+    console.log('actionName', this.actionName);
   }
 
 
@@ -32,11 +43,12 @@ export class SignupComponent implements OnInit {
         "state":['',[]],
         "zipCode":['',[Validators.required]]
       })
-    })
+    },{validator:passWordMisMatch})
   }
 
   onFormSubmit(){
-    console.log("formValue", this.signUpForm.value)
+
+    console.log("formValue", this.signUpForm)
   }
 
   showPage = {
@@ -56,7 +68,12 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  get LastName(){
+    return this.signUpForm.get('lastName');
+  }
   get FirstName(){
     return this.signUpForm.get('firstName');
   }
+
+
 }
