@@ -16,4 +16,10 @@ export class HeaderComponent implements OnInit {
     this.actionType = 'SignUp'
   }
 
+  signUpHandler(event:boolean){
+    if(event){
+      this.actionType = 'SignIn';
+    }
+  }
+
 }

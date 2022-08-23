@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { passWordMisMatch } from 'src/app/shared/validator/custom.validator';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,9 +14,12 @@ export class SignupComponent implements OnInit {
   @Input()
   actionName:string = '';
 
+  @Output()
+  signUpCompleted:EventEmitter<boolean>=new EventEmitter(false);
+
   // set actionName()
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder,private login:LoginService) { }
 
   ngOnInit(): void {
     this.createFormStructure();
@@ -29,25 +33,30 @@ export class SignupComponent implements OnInit {
   createFormStructure(){
     this.signUpForm  = this.fb.group({
       "firstName":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10),Validators.pattern("^[a-zA-z]+$")]],
-      "lastName":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10),Validators.pattern("^[a-zA-z]+$")]],
+      "lastName":['',[Validators.required,Validators.maxLength(10),Validators.pattern("^[a-zA-z]+$")]],
       "mobileNumber":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
-      "dateofBirth":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
-      "emailId":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
+      "dateofBirth":['',[]],
+      "emailId":['',[Validators.required,Validators.minLength(2)]],
       "password":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
       "confirmPassword":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
       "isFormAccept":[false,[Validators.required]],
       "address":this.fb.group({
-        "line1":['',[Validators.required]],
+        "line1":['',[]],
         "line2":['',[]],
         "city":['',[]],
         "state":['',[]],
-        "zipCode":['',[Validators.required]]
+        "zipCode":['',[]]
       })
     },{validator:passWordMisMatch})
   }
 
   onFormSubmit(){
-
+    if(this.signUpForm.valid){
+      this.login.registerUser(this.signUpForm.value).subscribe(el=>{
+        console.log('response', el);
+        this.signUpCompleted.emit(true);
+      })
+    }
     console.log("formValue", this.signUpForm)
   }
 

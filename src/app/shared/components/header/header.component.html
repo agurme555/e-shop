@@ -52,7 +52,7 @@
       </div>
       <div class="modal-body">
         <app-signin *ngIf="actionType == 'SignIn'"></app-signin>
-        <app-signup *ngIf="actionType == 'SignUp'" [actionName]="'SignUp'"></app-signup>
+        <app-signup *ngIf="actionType == 'SignUp'" [actionName]="'SignUp'" (signUpCompleted)="signUpHandler($event)"></app-signup>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary m-auto" *ngIf="actionType == 'SignIn'" (click)="handleAction()">New User</button>
