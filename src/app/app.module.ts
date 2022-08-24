@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import {HttpClientModule} from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +19,9 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     SharedModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

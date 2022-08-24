@@ -11,8 +11,19 @@
       </form>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item listItem">
+          <li class="nav-item listItem" *ngIf="!isUserLoggedIn">
             <a class="btn btn-white bg-white nav-link active text-dark loginBtn" aria-current="page" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a>
+          </li>
+          <li class="nav-item dropdown listItem" *ngIf="isUserLoggedIn">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{user.firstName}}&nbsp;{{user.lastName}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" [routerLink]="['/signUp']">My Profile</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
           </li>
           <li class="nav-item listItem">
             <a class="nav-link text-white" href="#">Become a Seller</a>
@@ -48,10 +59,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title text-center m-auto" style="color: black;" id="exampleModalLabel">{{actionType}}</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" #buttonClose class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <app-signin *ngIf="actionType == 'SignIn'"></app-signin>
+        <app-signin *ngIf="actionType == 'SignIn'" (signInCompleted)="signInHandler($event)"></app-signin>
         <app-signup *ngIf="actionType == 'SignUp'" [actionName]="'SignUp'" (signUpCompleted)="signUpHandler($event)"></app-signup>
       </div>
       <div class="modal-footer">

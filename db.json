@@ -295,6 +295,24 @@
         "zipCode": ""
       },
       "id": 3
+    },
+    {
+      "firstName": "Mahi",
+      "lastName": "dhoni",
+      "mobileNumber": "7879877987",
+      "dateofBirth": "",
+      "emailId": "mahi@gmail.com",
+      "password": "123456",
+      "confirmPassword": "123456",
+      "isFormAccept": true,
+      "address": {
+        "line1": "",
+        "line2": "",
+        "city": "",
+        "state": "",
+        "zipCode": ""
+      },
+      "id": 4
     }
   ]
 }

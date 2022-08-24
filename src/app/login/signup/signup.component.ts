@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { passWordMisMatch } from 'src/app/shared/validator/custom.validator';
 import { LoginService } from '../services/login.service';
 
@@ -10,7 +11,7 @@ import { LoginService } from '../services/login.service';
 })
 export class SignupComponent implements OnInit {
   signUpForm!:FormGroup;
-
+  user:any;
   @Input()
   actionName:string = '';
 
@@ -19,10 +20,15 @@ export class SignupComponent implements OnInit {
 
   // set actionName()
 
-  constructor(private fb:FormBuilder,private login:LoginService) { }
+  constructor(private fb:FormBuilder,private login:LoginService,private auth:AuthenticationService) { }
 
   ngOnInit(): void {
     this.createFormStructure();
+    this.user = this.auth.getUser();
+    if(this.user != null){
+      this.signUpForm.patchValue(this.user);
+    }
+
   }
 
   ngAfterViewInit(){
