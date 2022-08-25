@@ -1,0 +1,127 @@
+<div [ngClass]="actionName != 'SignUp' ? 'container mt-4 w-50 card' : 'jumbotron'">
+    <div class="card">
+        <!-- style="width: 50%;margin-left: 20%;" -->
+        <form [formGroup]="signUpForm" (ngSubmit)="onFormSubmit()" class="row g-3 text-left bg-white">
+            <div class="mb-1">
+              <label for="firstName" class="form-label">First name</label>
+              <input type="text" class="form-control" name="firstName"  id="firstName" pattern="^[a-zA-z]+$" formControlName="firstName">
+              <!-- <div  *ngIf="signUpForm.controls['firstName'].errors?.['required'] && (signUpForm.controls['firstName'].touched || signUpForm.controls['firstName'].dirty)" class="invalid-feedback d-block">
+                    First Name is Mandatory
+              </div>
+              <div  *ngIf="signUpForm.controls['firstName'].errors?.['maxlength'] && (signUpForm.controls['firstName'].touched || signUpForm.controls['firstName'].dirty)" class="invalid-feedback d-block">
+                Max 10 characters allowed
+          </div> -->
+          <div  *ngIf="FirstName?.errors?.['maxlength'] && (FirstName?.touched || FirstName?.dirty)" class="invalid-feedback d-block">
+            Max 10 characters allowed
+        </div>
+              <!-- <div class="valid-feedback">
+                Looks good!
+              </div> -->
+              <!-- is-valid -->
+            </div>
+            <div class="mb-1">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control is-valid" name="lastName" id="lastName" formControlName="lastName">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="mb-1">
+                <label for="mobNumber" class="form-label">Mobile Number</label>
+                <input type="text" class="form-control is-valid" name="mobNumber" id="mobNumber" formControlName="mobileNumber">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            <div class="mb-1" *ngIf="actionName != 'SignUp'">
+                <label for="dob" class="form-label">Date Of Birth</label>
+                <input type="date" class="form-control is-valid" name="dob" id="dob" formControlName="dateofBirth">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+            </div>
+            <div class="mb-1">
+              <label for="emailId" class="form-label">Email Id</label>
+              <input type="text" class="form-control is-valid" name="emailId" id="emailId" formControlName="emailId">
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="mb-1">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control is-valid" name="password" id="password" formControlName="password">
+              <div *ngIf="signUpForm.errors?.['passwordNotMatch'] && (signUpForm.controls['password'].touched || signUpForm.controls['password'].dirty)" class="invalid-feedback d-block">
+                Password and Confirm Password is not same 
+                </div>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="mb-1">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control is-valid" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword">
+               <div *ngIf="signUpForm.errors?.['passwordNotMatch'] && (signUpForm.controls['confirmPassword'].touched || signUpForm.controls['confirmPassword'].dirty)" class="invalid-feedback d-block">
+                    Password and Confirm Password is not same 
+               </div>
+                <!-- <div class="valid-feedback">
+                  Looks good!
+                </div> -->
+              </div>
+             <h3>Addree Section :</h3>
+             <div formGroupName="address" *ngIf="actionName != 'SignUp'">
+            <div class="col-md-6">
+              <label for="line1" class="form-label">Line 1</label>
+              <input type="text" class="form-control is-invalid" name="line1" id="line1" aria-describedby="validationServer03Feedback"  formControlName="line1">
+              <div id="validationServer03Feedback" class="invalid-feedback">
+                Please provide a valid city.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="line2" class="form-label">Line 2</label>
+              <input type="text" class="form-control is-invalid" name="line2" id="line2" aria-describedby="validationServer03Feedback"  formControlName="line2">
+              <div id="validationServer03Feedback" class="invalid-feedback">
+                Please provide a valid city.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="city" class="form-label">City</label>
+              <input type="text" class="form-control is-invalid" name="city" id="city" aria-describedby="validationServer03Feedback" formControlName="city">
+              <div id="validationServer03Feedback" class="invalid-feedback">
+                Please provide a valid city.
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="state" class="form-label">State</label>
+              <select class="form-select is-invalid" id="state" name="state" aria-describedby="validationServer04Feedback" formControlName="state">
+                <option selected disabled value="">Choose...</option>
+                <option>...</option>
+              </select>
+              <div id="validationServer04Feedback" class="invalid-feedback">
+                Please select a valid state.
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="zipCode" class="form-label">Zip</label>
+              <input type="text" class="form-control is-invalid" id="zipCode" name="zip" aria-describedby="validationServer05Feedback" formControlName="zipCode">
+              <div id="validationServer05Feedback" class="invalid-feedback">
+                Please provide a valid zip.
+              </div>
+            </div>
+        </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input is-invalid" type="checkbox" name="isAccept" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required formControlName="isFormAccept">
+                <label class="form-check-label" for="invalidCheck3">
+                  Agree to terms and conditions
+                </label>
+                <div id="invalidCheck3Feedback" class="invalid-feedback">
+                  You must agree before submitting.
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Submit form</button>
+            </div>
+          </form>
+    </div>
+</div>
