@@ -26,7 +26,7 @@
             </ul>
           </li>
           <li class="nav-item listItem">
-            <a class="nav-link text-white" href="#">Become a Seller</a>
+            <a class="nav-link text-white" [routerLink]="['/seller']">Become a Seller</a>
           </li>
           <li class="nav-item dropdown listItem">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,7 +40,7 @@
             </ul>
           </li>
           <li class="nav-item listItem">
-            <a class="nav-link text-white" href="#"><i class="bi bi-cart3"></i> Cart</a>
+            <a class="nav-link text-white" [routerLink]="['/cart']"><i class="bi bi-cart3"></i> Cart <span class="badge bg-success mb-1">{{(selectedItems | async)?.length}}</span></a>
           </li>
         </ul>
       </div>
