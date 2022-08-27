@@ -28,10 +28,13 @@ export class CartService {
   }
 
   getSelectedProducts() {
-    let productArr: any;
+    let productArr: any = [];
     productArr = localStorage.getItem("products");
-    productArr = JSON.parse(productArr);
-    this.emitSelectProduct(productArr);
+    // productArr = JSON.parse(productArr);
+    if(productArr){
+      productArr = JSON.parse(productArr);
+      this.emitSelectProduct(productArr);
+    }
     // if(productArr)
     // this.selectItems.pipe(take(1), map((products) => {
     //   products=[];
