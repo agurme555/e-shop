@@ -77,7 +77,7 @@
               <h5 class="card-title">{{item.title}}</h5>
               <p class="card-text" style="white-space:nowrap;overflow:hidden">{{item.description}}</p>
               <p><strong>Price</strong> : ${{item.price}}</p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
+              <a class="btn btn-primary" (click)="addToCart(item)">Add to Cart</a>
             </div>
           </div>
       </div>
