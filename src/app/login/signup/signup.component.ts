@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
       "mobileNumber":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
       "dateofBirth":['',[]],
       "emailId":['',[Validators.required,Validators.minLength(2)]],
-      "password":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
+      "password":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)],],
       "confirmPassword":['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
       "isFormAccept":[false,[Validators.required]],
       "address":this.fb.group({
